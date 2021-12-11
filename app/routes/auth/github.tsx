@@ -5,7 +5,6 @@ export let loader: LoaderFunction = () => {
   return redirect("/login");
 };
 
-export let action: ActionFunction = async ({ request }) => {
-  console.dir({ request });
-  return await auth.authenticate("github", request);
+export let action: ActionFunction = ({ request }) => {
+  return auth.authenticate("github", request);
 };

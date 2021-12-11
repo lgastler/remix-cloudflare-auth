@@ -1,12 +1,9 @@
-import {
-  GitHubProfile,
-  GitHubStrategy,
-} from "remix-auth/build/strategies/github";
+import { GitHubProfile, GitHubStrategy } from "~/remix-auth/github";
 import { Authenticator } from "remix-auth/build/authenticator";
 
 import { sessionStorage } from "~/session.server";
 
-export let auth = new Authenticator<GitHubProfile>(sessionStorage);
+export let auth = new Authenticator<{ name: string }>(sessionStorage);
 
 let gitHubStrategy = new GitHubStrategy(
   {
@@ -19,7 +16,7 @@ let gitHubStrategy = new GitHubStrategy(
     // an empty string, you can skip it using `_` as param name
 
     // Get the user data from your DB or API using the tokens and profile
-    return profile;
+    return { name: profile.displayName };
   }
 );
 
